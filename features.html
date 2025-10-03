@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Features - Mission Education Basic School</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --black: #121212;
+            --purple: #6a0dad;
+            --red: #d32f2f;
+            --green: #388e3c;
+            --light-bg: #f5f5f5;
+            --white: #ffffff;
+            --nature-green: #2e7d32;
+        }
+
+        body {
+            background-color: var(--light-bg);
+            color: var(--black);
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--black), var(--nature-green));
+            color: var(--white);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-icon {
+            font-size: 2.5rem;
+            margin-right: 10px;
+            color: var(--green);
+        }
+
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .logo-text span {
+            color: var(--red);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+
+        nav ul li a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+
+        nav ul li a:hover {
+            color: var(--green);
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .page-hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1546410531-bb4caa6b424d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80');
+            background-size: cover;
+            background-position: center;
+            color: var(--white);
+            padding: 5rem 0;
+            text-align: center;
+        }
+
+        .page-hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .page-hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .section {
+            padding: 5rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--nature-green);
+        }
+
+        .feature-detail {
+            display: flex;
+            align-items: center;
+            margin-bottom: 4rem;
+            background-color: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-detail.reverse {
+            flex-direction: row-reverse;
+        }
+
+        .feature-image {
+            flex: 1;
+            height: 400px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .feature-content {
+            flex: 1;
+            padding: 3rem;
+        }
+
+        .feature-content h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--nature-green);
+        }
+
+        .feature-content p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .feature-list {
+            list-style: none;
+            margin-top: 1.5rem;
+        }
+
+        .feature-list li {
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .feature-list li i {
+            color: var(--nature-green);
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+
+        .daily-schedule {
+            background-color: var(--white);
+            border-radius: 10px;
+            padding: 3rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-top: 2rem;
+        }
+
+        .schedule-item {
+            display: flex;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .schedule-time {
+            flex: 0 0 150px;
+            font-weight: 600;
+            color: var(--nature-green);
+        }
+
+        .schedule-activity {
+            flex: 1;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--red);
+            color: var(--white);
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            margin-top: 1rem;
+        }
+
+        .btn:hover {
+            background-color: var(--purple);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        footer {
+            background: linear-gradient(135deg, var(--black), var(--nature-green));
+            color: var(--white);
+            padding: 3rem 0 1rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-section h3:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background-color: var(--green);
+        }
+
+        .contact-info {
+            list-style: none;
+        }
+
+        .contact-info li {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .contact-info li i {
+            margin-right: 10px;
+            color: var(--green);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: var(--white);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background-color: var(--green);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .developer {
+            text-align: center;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            nav ul {
+                margin-top: 1rem;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+
+            nav ul li {
+                margin: 0 0.5rem 0.5rem;
+            }
+
+            .page-hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .page-hero p {
+                font-size: 1rem;
+            }
+
+            .feature-detail, .feature-detail.reverse {
+                flex-direction: column;
+            }
+
+            .feature-image {
+                width: 100%;
+                height: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-graduation-cap logo-icon"></i>
+                    <div class="logo-text">Mission <span>Education</span></div>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="features.html" style="color: var(--green);">Features</a></li>
+                        <li><a href="pricing.html">Pricing</a></li>
+                        <li><a href="#">Staff</a></li>
+                        <li><a href="results.html">Results</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Hero Section -->
+    <section class="page-hero">
+        <div class="container">
+            <h1>Our School Environment</h1>
+            <p>A peaceful learning sanctuary surrounded by nature, where education blossoms like a beautiful garden</p>
+        </div>
+    </section>
+
+    <!-- Natural Environment Section -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Our Natural Campus</h2>
+            
+            <div class="feature-detail">
+                <div class="feature-image" style="background-image: url('https://images.unsplash.com/photo-1581833971358-2c8b550f87b3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80');"></div>
+                <div class="feature-content">
+                    <h3>A School in a Garden</h3>
+                    <p>Mission Education Basic School is nestled in a serene natural environment, surrounded by lush greenery and beautiful gardens. Our campus is designed to provide a peaceful atmosphere that enhances learning and personal growth.</p>
+                    <p>Far from the noise and distractions of the city, our students learn in harmony with nature, developing a deep appreciation for the environment while focusing on their education.</p>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-tree"></i> Surrounded by mature trees and gardens</li>
+                        <li><i class="fas fa-leaf"></i> Natural, pollution-free environment</li>
+                        <li><i class="fas fa-wind"></i> Fresh air and open spaces</li>
+                        <li><i class="fas fa-seedling"></i> Gardening activities for students</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="feature-detail reverse">
+                <div class="feature-image" style="background-image: url('https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1422&q=80');"></div>
+                <div class="feature-content">
+                    <h3>Peaceful Learning Atmosphere</h3>
+                    <p>At Mission Education, we believe that a calm and peaceful environment is essential for effective learning. Our location away from urban distractions allows students to focus on their studies while developing inner peace and mindfulness.</p>
+                    <p>The natural surroundings provide the perfect backdrop for creative thinking, exploration, and holistic development of each child.</p>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-peace"></i> Tranquil setting for focused learning</li>
+                        <li><i class="fas fa-brain"></i> Enhanced concentration and creativity</li>
+                        <li><i class="fas fa-heart"></i> Stress-free environment for students</li>
+                        <li><i class="fas fa-hands-helping"></i> Community living in harmony with nature</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Daily Routine Section -->
+    <section class="section" style="background-color: var(--light-bg);">
+        <div class="container">
+            <h2 class="section-title">Our Daily Schedule</h2>
+            <p style="text-align: center; max-width: 800px; margin: 0 auto 2rem;">Our school day begins early to make the most of the peaceful morning hours and align with natural rhythms.</p>
+            
+            <div class="daily-schedule">
+                <div class="schedule-item">
+                    <div class="schedule-time">7:00 AM</div>
+                    <div class="schedule-activity">
+                        <h4>School Begins</h4>
+                        <p>Students arrive and settle into their classrooms, ready to start the day with fresh minds.</p>
+                    </div>
+                </div>
+                
+                <div class="schedule-item">
+                    <div class="schedule-time">7:15 AM</div>
+                    <div class="schedule-activity">
+                        <h4>Morning Prayer & Assembly</h4>
+                        <p>We begin each day with a peaceful prayer session and morning assembly in our natural courtyard, setting a positive tone for the day ahead.</p>
+                    </div>
+                </div>
+                
+                <div class="schedule-item">
+                    <div class="schedule-time">7:30 AM - 12:30 PM</div>
+                    <div class="schedule-activity">
+                        <h4>Academic Sessions</h4>
+                        <p>Focused learning periods with breaks for outdoor activities and refreshments. Our classrooms are designed to let in natural light and fresh air.</p>
+                    </div>
+                </div>
+                
+                <div class="schedule-item">
+                    <div class="schedule-time">12:30 PM</div>
+                    <div class="schedule-activity">
+                        <h4>Lunch in Nature</h4>
+                        <p>Students enjoy their meals in our garden cafeteria or outdoor seating areas, surrounded by nature.</p>
+                    </div>
+                </div>
+                
+                <div class="schedule-item">
+                    <div class="schedule-time">1:00 PM - 2:00 PM</div>
+                    <div class="schedule-activity">
+                        <h4>Academic Sessions continued</h4>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- <div style="text-align: center; margin-top: 3rem;">
+                <a href="contact.html" class="btn">Schedule a Visit to Our Campus</a>
+            </div> -->
+        </div>
+    </section>
+
+    <!-- Educational Philosophy Section -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Education in Harmony with Nature</h2>
+            
+            <div class="feature-detail">
+                <div class="feature-image" style="background-image: url('https://images.unsplash.com/photo-1497636577773-f1231844b336?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80');"></div>
+                <div class="feature-content">
+                    <h3>Holistic Development Approach</h3>
+                    <p>At Mission Education Basic School, we believe that true education involves the development of mind, body, and spirit. Our natural environment plays a crucial role in this holistic approach.</p>
+                    <p>Students learn not only from textbooks but also from the world around them - observing seasonal changes, understanding ecosystems, and developing environmental stewardship.</p>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-book-open"></i> Outdoor learning sessions</li>
+                        <li><i class="fas fa-binoculars"></i> Nature observation activities</li>
+                        <li><i class="fas fa-recycle"></i> Environmental education</li>
+                        <li><i class="fas fa-hiking"></i> Nature walks and exploration</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-map-marker-alt"></i> Mission Education Basic School</li>
+                        <li><i class="fas fa-phone"></i> +91 XXXXX XXXXX</li>
+                        <li><i class="fas fa-envelope"></i> info@missioneducation.edu</li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="contact-info">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="features.html">Features</a></li>
+                        <li><a href="pricing.html">Pricing</a></li>
+                        <!-- <li><a href="staff.html">Staff</a></li> -->
+                         <li><a href="feedback.html">Feedback</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Follow Us</h3>
+                    <p>Stay connected with us on social media for updates and announcements.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 Mission Education Basic School. All Rights Reserved.</p>
+                <div class="developer">
+                    Website developed by <a href="https://www.instagram.com/pawan.73719/" style="color: var(--green);">Pawan.73719</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

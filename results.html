@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Results - Mission Education Basic School</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --black: #121212;
+            --purple: #6a0dad;
+            --red: #d32f2f;
+            --green: #388e3c;
+            --light-bg: #f5f5f5;
+            --white: #ffffff;
+            --results-blue: #1565c0;
+            --accent-orange: #ff8f00;
+        }
+
+        body {
+            background-color: var(--light-bg);
+            color: var(--black);
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--black), var(--results-blue));
+            color: var(--white);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-icon {
+            font-size: 2.5rem;
+            margin-right: 10px;
+            color: var(--green);
+        }
+
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .logo-text span {
+            color: var(--red);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+
+        nav ul li a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+
+        nav ul li a:hover {
+            color: var(--green);
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .page-hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1434030216411-0b793f4b4173?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
+            background-size: cover;
+            background-position: center;
+            color: var(--white);
+            padding: 5rem 0;
+            text-align: center;
+        }
+
+        .page-hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .page-hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .section {
+            padding: 5rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--results-blue);
+        }
+
+        .results-info {
+            background-color: var(--white);
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .results-info p {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+
+        .exam-notice {
+            background-color: #fff8e1;
+            border-left: 4px solid var(--accent-orange);
+            padding: 1rem;
+            margin-top: 1rem;
+            border-radius: 4px;
+        }
+
+        .exam-notice i {
+            color: var(--accent-orange);
+            margin-right: 10px;
+        }
+
+        .classes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .class-card {
+            background-color: var(--white);
+            border-radius: 10px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+            border-top: 5px solid var(--results-blue);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .class-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .class-icon {
+            font-size: 3rem;
+            color: var(--results-blue);
+            margin-bottom: 1rem;
+        }
+
+        .class-name {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--black);
+        }
+
+        .results-status {
+            background-color: #e3f2fd;
+            color: var(--results-blue);
+            padding: 0.5rem 1rem;
+            border-radius: 30px;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 1.5rem;
+        }
+
+        .results-placeholder {
+            background-color: #f5f5f5;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            min-height: 120px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .placeholder-text {
+            color: #757575;
+            font-style: italic;
+            text-align: center;
+        }
+
+        .update-badge {
+            position: absolute;
+            top: 15px;
+            right: -30px;
+            background-color: var(--accent-orange);
+            color: white;
+            padding: 5px 30px;
+            transform: rotate(45deg);
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--red);
+            color: var(--white);
+            padding: 10px 20px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .btn:hover {
+            background-color: var(--purple);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--results-blue);
+            color: var(--results-blue);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--results-blue);
+            color: white;
+        }
+
+        .academic-year {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .year-selector {
+            display: inline-flex;
+            background-color: var(--white);
+            border-radius: 30px;
+            padding: 5px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin-top: 1rem;
+        }
+
+        .year-option {
+            padding: 8px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .year-option.active {
+            background-color: var(--results-blue);
+            color: white;
+        }
+
+        .performance-stats {
+            background-color: var(--white);
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin-top: 3rem;
+            text-align: center;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .stat-item {
+            padding: 1.5rem;
+            border-radius: 8px;
+            background-color: #f5f5f5;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--results-blue);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        footer {
+            background: linear-gradient(135deg, var(--black), var(--results-blue));
+            color: var(--white);
+            padding: 3rem 0 1rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-section h3:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background-color: var(--green);
+        }
+
+        .contact-info {
+            list-style: none;
+        }
+
+        .contact-info li {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .contact-info li i {
+            margin-right: 10px;
+            color: var(--green);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: var(--white);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background-color: var(--green);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .developer {
+            text-align: center;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            nav ul {
+                margin-top: 1rem;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+
+            nav ul li {
+                margin: 0 0.5rem 0.5rem;
+            }
+
+            .page-hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .page-hero p {
+                font-size: 1rem;
+            }
+
+            .classes-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-graduation-cap logo-icon"></i>
+                    <div class="logo-text">Mission <span>Education</span></div>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="features.html">Features</a></li>
+                        <li><a href="pricing.html">Pricing</a></li>
+                        <li><a href="staff.html">Staff</a></li>
+                        <li><a href="results.html" style="color: var(--green);">Results</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Hero Section -->
+    <section class="page-hero">
+        <div class="container">
+            <h1>Student Results & Performance</h1>
+            <p>Celebrating the academic achievements and progress of our students across all classes</p>
+        </div>
+    </section>
+
+    <!-- Results Section -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Academic Results</h2>
+            
+            <div class="results-info">
+                <p>We are proud of our students' consistent performance and academic growth. Results are updated after each examination cycle.</p>
+                <p>Select a class below to view detailed results (to be updated after examinations).</p>
+                
+                <div class="exam-notice">
+                    <i class="fas fa-info-circle"></i>
+                    <strong>Note:</strong> Final examination results for the current academic year will be published soon.
+                </div>
+            </div>
+            
+            <div class="academic-year">
+                <h3>Academic Year</h3>
+                <div class="year-selector">
+                    <div class="year-option active">2023-2024</div>
+                    <div class="year-option">2022-2023</div>
+                    <div class="year-option">2021-2022</div>
+                </div>
+            </div>
+            
+            <div class="classes-grid">
+                <!-- Nursery -->
+                <div class="class-card">
+                    <div class="update-badge">Coming Soon</div>
+                    <i class="fas fa-baby class-icon"></i>
+                    <h3 class="class-name">Nursery</h3>
+                    <div class="results-status">Results Pending</div>
+                    <div class="results-placeholder">
+                        <p class="placeholder-text">Nursery results will be available after the annual evaluation.</p>
+                        <p class="placeholder-text">Focus on developmental milestones and readiness assessment.</p>
+                    </div>
+                    <a href="#" class="btn btn-outline">View Details</a>
+                </div>
+                
+                <!-- LKG -->
+                <div class="class-card">
+                    <div class="update-badge">Coming Soon</div>
+                    <i class="fas fa-pencil-alt class-icon"></i>
+                    <h3 class="class-name">LKG</h3>
+                    <div class="results-status">Results Pending</div>
+                    <div class="results-placeholder">
+                        <p class="placeholder-text">LKG evaluation results will be published after final assessments.</p>
+                        <p class="placeholder-text">Assessment based on cognitive and motor skills development.</p>
+                    </div>
+                    <a href="#" class="btn btn-outline">View Details</a>
+                </div>
+                
+                <!-- UKG -->
+                <div class="class-card">
+                    <div class="update-badge">Coming Soon</div>
+                    <i class="fas fa-book-open class-icon"></i>
+                    <h3 class="class-name">UKG</h3>
+                    <div class="results-status">Results Pending</div>
+                    <div class="results-placeholder">
+                        <p class="placeholder-text">UKG results are being compiled and will be available shortly.</p>
+                        <p class="placeholder-text">Includes literacy, numeracy, and social skills evaluation.</p>
+                    </div>
+                    <a href="#" class="btn btn-outline">View Details</a>
+                </div>
+                
+                <!-- Class 1 -->
+                <div class="class-card">
+                    <div class="update-badge">Coming Soon</div>
+                    <i class="fas fa-star class-icon"></i>
+                    <h3 class="class-name">Class 1</h3>
+                    <div class="results-status">Results Pending</div>
+                    <div class="results-placeholder">
+                        <p class="placeholder-text">Class 1 annual results will be updated after examination.</p>
+                        <p class="placeholder-text">Comprehensive assessment across all subjects.</p>
+                    </div>
+                    <a href="#" class="btn btn-outline">View Details</a>
+                </div>
+                
+                <!-- Class 2 -->
+                <div class="class-card">
+                    <div class="update-badge">Coming Soon</div>
+                    <i class="fas fa-award class-icon"></i>
+                    <h3 class="class-name">Class 2</h3>
+                    <div class="results-status">Results Pending</div>
+                    <div class="results-placeholder">
+                        <p class="placeholder-text">Class 2 results are being prepared for publication.</p>
+                        <p class="placeholder-text">Includes subject-wise performance analysis.</p>
+                    </div>
+                    <a href="#" class="btn btn-outline">View Details</a>
+                </div>
+                
+                <!-- Class 3 -->
+                <div class="class-card">
+                    <div class="update-badge">Coming Soon</div>
+                    <i class="fas fa-medal class-icon"></i>
+                    <h3 class="class-name">Class 3</h3>
+                    <div class="results-status">Results Pending</div>
+                    <div class="results-placeholder">
+                        <p class="placeholder-text">Class 3 examination results will be available soon.</p>
+                        <p class="placeholder-text">Detailed report on academic progress and achievements.</p>
+                    </div>
+                    <a href="#" class="btn btn-outline">View Details</a>
+                </div>
+                
+                <!-- Class 4 -->
+                <div class="class-card">
+                    <div class="update-badge">Coming Soon</div>
+                    <i class="fas fa-trophy class-icon"></i>
+                    <h3 class="class-name">Class 4</h3>
+                    <div class="results-status">Results Pending</div>
+                    <div class="results-placeholder">
+                        <p class="placeholder-text">Class 4 final results are under evaluation process.</p>
+                        <p class="placeholder-text">Complete academic performance overview.</p>
+                    </div>
+                    <a href="#" class="btn btn-outline">View Details</a>
+                </div>
+                
+                <!-- Class 5 -->
+                <div class="class-card">
+                    <div class="update-badge">Coming Soon</div>
+                    <i class="fas fa-graduation-cap class-icon"></i>
+                    <h3 class="class-name">Class 5</h3>
+                    <div class="results-status">Results Pending</div>
+                    <div class="results-placeholder">
+                        <p class="placeholder-text">Class 5 annual examination results coming soon.</p>
+                        <p class="placeholder-text">Includes subject rankings and overall performance.</p>
+                    </div>
+                    <a href="#" class="btn btn-outline">View Details</a>
+                </div>
+                
+                <!-- Class 6 -->
+                <div class="class-card">
+                    <div class="update-badge">Coming Soon</div>
+                    <i class="fas fa-user-graduate class-icon"></i>
+                    <h3 class="class-name">Class 6</h3>
+                    <div class="results-status">Results Pending</div>
+                    <div class="results-placeholder">
+                        <p class="placeholder-text">Class 6 results will be published after final evaluation.</p>
+                        <p class="placeholder-text">Comprehensive academic assessment report.</p>
+                    </div>
+                    <a href="#" class="btn btn-outline">View Details</a>
+                </div>
+                
+                <!-- Class 7 -->
+                <div class="class-card">
+                    <div class="update-badge">Coming Soon</div>
+                    <i class="fas fa-chart-line class-icon"></i>
+                    <h3 class="class-name">Class 7</h3>
+                    <div class="results-status">Results Pending</div>
+                    <div class="results-placeholder">
+                        <p class="placeholder-text">Class 7 annual results are being compiled.</p>
+                        <p class="placeholder-text">Detailed analysis of academic performance.</p>
+                    </div>
+                    <a href="#" class="btn btn-outline">View Details</a>
+                </div>
+                
+                <!-- Class 8 -->
+                <div class="class-card">
+                    <div class="update-badge">Coming Soon</div>
+                    <i class="fas fa-user-tie class-icon"></i>
+                    <h3 class="class-name">Class 8</h3>
+                    <div class="results-status">Results Pending</div>
+                    <div class="results-placeholder">
+                        <p class="placeholder-text">Class 8 final results will be available shortly.</p>
+                        <p class="placeholder-text">Includes preparation assessment for higher classes.</p>
+                    </div>
+                    <a href="#" class="btn btn-outline">View Details</a>
+                </div>
+            </div>
+            
+            <div class="performance-stats">
+                <h3>Overall School Performance</h3>
+                <p>Historical data showing our consistent academic excellence</p>
+                
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-value">100%</div>
+                        <div class="stat-label">Pass Percentage</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">78%</div>
+                        <div class="stat-label">First Division Achievers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">250+</div>
+                        <div class="stat-label">Successful Students</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">8+</div>
+                        <div class="stat-label">Years of Excellence</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-map-marker-alt"></i> Mission Education Basic School</li>
+                        <li><i class="fas fa-phone"></i> +91 XXXXX XXXXX</li>
+                        <li><i class="fas fa-envelope"></i> info@missioneducation.edu</li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="contact-info">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="features.html">Features</a></li>
+                        <li><a href="pricing.html">Pricing</a></li>
+                        <li><a href="feedback.html">Feedback</a></li>
+                        <!-- <li><a href="staff.html">Staff</a></li> -->
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Follow Us</h3>
+                    <p>Stay connected with us on social media for updates and announcements.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 Mission Education Basic School. All Rights Reserved.</p>
+                <div class="developer">
+                    Website developed by <a href="https://www.instagram.com/pawan.73719/" style="color: var(--green);">Pawan.73719</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Year selector functionality
+        document.querySelectorAll('.year-option').forEach(option => {
+            option.addEventListener('click', function() {
+                document.querySelectorAll('.year-option').forEach(opt => {
+                    opt.classList.remove('active');
+                });
+                this.classList.add('active');
+                
+                // In a real implementation, this would load results for the selected year
+                // For now, we'll just show a simple alert
+                alert('Loading results for ' + this.textContent + ' academic year');
+            });
+        });
+
+        // Simulate loading results when "View Details" is clicked
+        document.querySelectorAll('.btn-outline').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                const className = this.closest('.class-card').querySelector('.class-name').textContent;
+                alert('Detailed results for ' + className + ' will be available after the examination results are published.');
+            });
+        });
+    </script>
+</body>
+</html>

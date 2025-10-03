@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flexible Pricing - Mission Education Basic School</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --black: #121212;
+            --purple: #6a0dad;
+            --red: #d32f2f;
+            --green: #388e3c;
+            --light-bg: #f5f5f5;
+            --white: #ffffff;
+            --compassion-orange: #ff9800;
+            --freedom-blue: #2196f3;
+        }
+
+        body {
+            background-color: var(--light-bg);
+            color: var(--black);
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--black), var(--freedom-blue));
+            color: var(--white);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-icon {
+            font-size: 2.5rem;
+            margin-right: 10px;
+            color: var(--green);
+        }
+
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .logo-text span {
+            color: var(--red);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+
+        nav ul li a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+
+        nav ul li a:hover {
+            color: var(--green);
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .page-hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1588072432836-4b4f66e6d247?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
+            background-size: cover;
+            background-position: center;
+            color: var(--white);
+            padding: 5rem 0;
+            text-align: center;
+        }
+
+        .page-hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .page-hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .section {
+            padding: 5rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--freedom-blue);
+        }
+
+        .philosophy {
+            background-color: var(--white);
+            text-align: center;
+        }
+
+        .philosophy-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .philosophy-icon {
+            font-size: 4rem;
+            color: var(--compassion-orange);
+            margin-bottom: 1.5rem;
+        }
+
+        .philosophy-content h2 {
+            color: var(--freedom-blue);
+            margin-bottom: 1.5rem;
+        }
+
+        .philosophy-content p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .pricing-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .pricing-card {
+            background-color: var(--white);
+            border-radius: 10px;
+            padding: 2.5rem;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .pricing-card.popular {
+            border: 2px solid var(--freedom-blue);
+            transform: scale(1.05);
+        }
+
+        .pricing-card.popular:before {
+            content: 'Most Popular';
+            position: absolute;
+            top: 15px;
+            right: -30px;
+            background-color: var(--freedom-blue);
+            color: white;
+            padding: 5px 30px;
+            transform: rotate(45deg);
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .pricing-header {
+            margin-bottom: 2rem;
+        }
+
+        .pricing-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--black);
+        }
+
+        .price {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--freedom-blue);
+            margin-bottom: 0.5rem;
+        }
+
+        .price-period {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin: 2rem 0;
+            text-align: left;
+        }
+
+        .pricing-features li {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .pricing-features li i {
+            color: var(--green);
+            margin-right: 10px;
+            font-size: 1.1rem;
+        }
+
+        .financial-aid {
+            background-color: var(--light-bg);
+        }
+
+        .aid-container {
+            background-color: var(--white);
+            border-radius: 10px;
+            padding: 3rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .aid-types {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .aid-type {
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+            border-left: 4px solid var(--compassion-orange);
+        }
+
+        .aid-icon {
+            font-size: 2.5rem;
+            color: var(--compassion-orange);
+            margin-bottom: 1rem;
+        }
+
+        .aid-type h3 {
+            margin-bottom: 1rem;
+            color: var(--black);
+        }
+
+        .process-steps {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .process-step {
+            flex: 1;
+            min-width: 200px;
+            text-align: center;
+            padding: 1.5rem;
+            position: relative;
+        }
+
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background-color: var(--freedom-blue);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0 auto 1rem;
+        }
+
+        .step-content h3 {
+            margin-bottom: 0.5rem;
+            color: var(--black);
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--red);
+            color: var(--white);
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            margin-top: 1rem;
+        }
+
+        .btn:hover {
+            background-color: var(--purple);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--freedom-blue);
+            color: var(--freedom-blue);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--freedom-blue);
+            color: white;
+        }
+
+        .testimonial {
+            background-color: var(--white);
+            text-align: center;
+            padding: 4rem 0;
+        }
+
+        .testimonial-content {
+            max-width: 800px;
+            margin: 0 auto;
+            font-style: italic;
+            font-size: 1.2rem;
+            line-height: 1.8;
+            position: relative;
+        }
+
+        .testimonial-content:before, .testimonial-content:after {
+            content: '"';
+            font-size: 4rem;
+            color: var(--compassion-orange);
+            opacity: 0.3;
+            position: absolute;
+        }
+
+        .testimonial-content:before {
+            top: -20px;
+            left: -40px;
+        }
+
+        .testimonial-content:after {
+            bottom: -40px;
+            right: -40px;
+        }
+
+        .testimonial-author {
+            margin-top: 2rem;
+            font-weight: 600;
+            color: var(--freedom-blue);
+        }
+
+        footer {
+            background: linear-gradient(135deg, var(--black), var(--freedom-blue));
+            color: var(--white);
+            padding: 3rem 0 1rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-section h3:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background-color: var(--green);
+        }
+
+        .contact-info {
+            list-style: none;
+        }
+
+        .contact-info li {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .contact-info li i {
+            margin-right: 10px;
+            color: var(--green);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: var(--white);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background-color: var(--green);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .developer {
+            text-align: center;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            nav ul {
+                margin-top: 1rem;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+
+            nav ul li {
+                margin: 0 0.5rem 0.5rem;
+            }
+
+            .page-hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .page-hero p {
+                font-size: 1rem;
+            }
+
+            .pricing-card.popular {
+                transform: scale(1);
+            }
+
+            .process-steps {
+                flex-direction: column;
+            }
+
+            .process-step {
+                margin-bottom: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-graduation-cap logo-icon"></i>
+                    <div class="logo-text">Mission <span>Education</span></div>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="features.html">Features</a></li>
+                        <li><a href="pricing.html" style="color: var(--green);">Pricing</a></li>
+                        <li><a href="#">Staff</a></li>
+                        <li><a href="results.html">Results</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Hero Section -->
+    <section class="page-hero">
+        <div class="container">
+            <h1>Education Freedom for All</h1>
+            <p>Flexible pricing and financial support to ensure quality education is accessible to every child, regardless of economic background</p>
+        </div>
+    </section>
+
+    <!-- Philosophy Section -->
+    <section class="section philosophy">
+        <div class="container">
+            <div class="philosophy-content">
+                <i class="fas fa-hands-helping philosophy-icon"></i>
+                <h2>Our Commitment to Accessible Education</h2>
+                <p>At Mission Education Basic School, we believe that financial circumstances should never be a barrier to quality education. Our flexible pricing model is designed with compassion to ensure that every child, regardless of economic background, has the opportunity to learn and grow.</p>
+                <p>We understand that each family has unique financial situations, and we're committed to working with parents to find a solution that makes quality education possible for their children.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Standard Pricing Section -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Standard Fee Structure</h2>
+            <p style="text-align: center; max-width: 800px; margin: 0 auto 2rem;">Our base fees are already designed to be affordable while maintaining the highest educational standards.</p>
+            
+            <div class="pricing-cards">
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3 class="pricing-title">Admission Fee</h3>
+                        <div class="price">₹3,000</div>
+                        <div class="price-period">One-time payment</div>
+                    </div>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> Includes registration and enrollment</li>
+                        <li><i class="fas fa-check"></i> Covers student ID and materials</li>
+                        <li><i class="fas fa-check"></i> Valid for entire academic journey</li>
+                        <li><i class="fas fa-check"></i> No hidden charges</li>
+                    </ul>
+                    <a href="contact.html" class="btn">Enroll Now</a>
+                </div>
+                
+                <div class="pricing-card popular">
+                    <div class="pricing-header">
+                        <h3 class="pricing-title">Monthly Tuition</h3>
+                        <div class="price">₹1,000</div>
+                        <div class="price-period">Per month</div>
+                    </div>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> Comprehensive academic program</li>
+                        <li><i class="fas fa-check"></i> Access to all school facilities</li>
+                        <li><i class="fas fa-check"></i> Regular assessments and reports</li>
+                        <li><i class="fas fa-check"></i> Extracurricular activities included</li>
+                        <li><i class="fas fa-check"></i> Transportation available at extra cost</li>
+                    </ul>
+                    <a href="contact.html" class="btn">Start Learning</a>
+                </div>
+                
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3 class="pricing-title">Sibling Discount</h3>
+                        <div class="price">15% Off</div>
+                        <div class="price-period">For each additional child</div>
+                    </div>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> Applied to monthly tuition</li>
+                        <li><i class="fas fa-check"></i> Available for all siblings</li>
+                        <li><i class="fas fa-check"></i> No limit on number of children</li>
+                        <li><i class="fas fa-check"></i> Makes education affordable for larger families</li>
+                    </ul>
+                    <a href="contact.html" class="btn">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Financial Aid Section -->
+    <section class="section financial-aid">
+        <div class="container">
+            <h2 class="section-title">Financial Assistance Programs</h2>
+            <p style="text-align: center; max-width: 800px; margin: 0 auto 2rem;">We offer various financial aid options to support families who need assistance with school fees.</p>
+            
+            <div class="aid-container">
+                <div class="aid-types">
+                    <div class="aid-type">
+                        <i class="fas fa-percentage aid-icon"></i>
+                        <h3>Fee Waivers</h3>
+                        <p>Partial or complete waiver of admission and tuition fees based on family income and circumstances.</p>
+                    </div>
+                    
+                    <div class="aid-type">
+                        <i class="fas fa-calendar-alt aid-icon"></i>
+                        <h3>Flexible Payment Plans</h3>
+                        <p>Customized payment schedules that align with family income cycles and financial capabilities.</p>
+                    </div>
+                    
+                    <div class="aid-type">
+                        <i class="fas fa-book-open aid-icon"></i>
+                        <h3>Scholarship Programs</h3>
+                        <p>Merit-based and need-based scholarships for exceptional students from underprivileged backgrounds.</p>
+                    </div>
+                </div>
+                
+                <h3 style="text-align: center; margin-top: 3rem; color: var(--freedom-blue);">Our Financial Assistance Process</h3>
+                
+                <div class="process-steps">
+                    <div class="process-step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h3>Application</h3>
+                            <p>Submit a simple financial assistance application form with basic income details.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="process-step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h3>Assessment</h3>
+                            <p>Our committee reviews each application with compassion and understanding.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="process-step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h3>Custom Solution</h3>
+                            <p>We create a personalized fee structure that works for your family's situation.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="process-step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h3>Confidential Support</h3>
+                            <p>All financial information is kept strictly confidential within our administration.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="text-align: center; margin-top: 3rem;">
+                    <a href="contact.html" class="btn btn-outline">Apply for Financial Assistance</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonial Section
+    <section class="testimonial">
+        <div class="container">
+            <div class="testimonial-content">
+                Mission Education Basic School gave my children the opportunity to learn when we couldn't afford other schools. The flexible payment plan they created for our family has been a blessing. My children are now receiving quality education without financial stress on our household.
+            </div>
+            <div class="testimonial-author">- Parent of two students</div>
+        </div>
+    </section> -->
+
+    <!-- Footer Section -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-map-marker-alt"></i> Mission Education Basic School</li>
+                        <li><i class="fas fa-phone"></i> +91 XXXXX XXXXX</li>
+                        <li><i class="fas fa-envelope"></i> info@missioneducation.edu</li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="contact-info">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="features.html">Features</a></li>
+                        <li><a href="pricing.html">Pricing</a></li>
+                        <li><a href="feedback.html">Feedback</a></li>
+                        <!-- <li><a href="#">Staff</a></li> -->
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Follow Us</h3>
+                    <p>Stay connected with us on social media for updates and announcements.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 Mission Education Basic School. All Rights Reserved.</p>
+                <div class="developer">
+                    Website developed by <a href="https://www.instagram.com/pawan.73719/" style="color: var(--green);">Pawan.73719</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
