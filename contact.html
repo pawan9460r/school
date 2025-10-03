@@ -72,6 +72,7 @@
             color: var(--red);
         }
 
+        /* Navigation Styles */
         nav ul {
             display: flex;
             list-style: none;
@@ -93,6 +94,74 @@
         nav ul li a:hover {
             color: var(--green);
             background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Mobile Menu Toggle */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background-color: var(--white);
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        /* Mobile Navigation */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: row;
+                text-align: left;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            nav {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: linear-gradient(135deg, var(--black), var(--contact-teal));
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+                transform: translateY(-10px);
+                opacity: 0;
+                visibility: hidden;
+                transition: all 0.3s ease;
+            }
+
+            nav.active {
+                transform: translateY(0);
+                opacity: 1;
+                visibility: visible;
+            }
+
+            nav ul {
+                flex-direction: column;
+                padding: 1rem 0;
+                margin-top: 0;
+            }
+
+            nav ul li {
+                margin: 0;
+                text-align: center;
+            }
+
+            nav ul li a {
+                display: block;
+                padding: 12px 20px;
+                border-radius: 0;
+            }
+
+            nav ul li a:hover {
+                background-color: rgba(255, 255, 255, 0.1);
+            }
         }
 
         .page-hero {
@@ -450,22 +519,8 @@
             color: rgba(255, 255, 255, 0.7);
         }
 
+        /* Additional Mobile Responsiveness */
         @media (max-width: 768px) {
-            .header-content {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            nav ul {
-                margin-top: 1rem;
-                justify-content: center;
-                flex-wrap: wrap;
-            }
-
-            nav ul li {
-                margin: 0 0.5rem 0.5rem;
-            }
-
             .page-hero h1 {
                 font-size: 2.2rem;
             }
@@ -476,6 +531,37 @@
 
             .contact-container {
                 grid-template-columns: 1fr;
+            }
+            
+            .logo-text {
+                font-size: 1.5rem;
+            }
+            
+            .logo-icon {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo-text {
+                font-size: 1.3rem;
+                line-height: 1.2;
+                margin-top: 5px;
+                margin-bottom: 5px;
+                text-align: left;
+                width: 100%;
+                display: block;
+                margin-left: 0;
+                padding-left: 0;
+            }
+            
+            .logo-icon {
+                font-size: 1.8rem;
+                margin-right: 8px;
+            }
+            
+            .header-content {
+                flex-wrap: wrap;
             }
         }
     </style>
@@ -490,7 +576,12 @@
                     <i class="fas fa-graduation-cap logo-icon"></i>
                     <div class="logo-text">Mission <span>Education</span></div>
                 </div>
-                <nav>
+                <div class="menu-toggle" id="menuToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <nav id="navMenu">
                     <ul>
                         <li><a href="index.html">Home</a></li>
                         <li><a href="features.html">Features</a></li>
@@ -773,6 +864,23 @@
     </footer>
 
     <script>
+        // Mobile menu toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const navMenu = document.getElementById('navMenu');
+        
+        menuToggle.addEventListener('click', function() {
+            navMenu.classList.toggle('active');
+            menuToggle.classList.toggle('active');
+        });
+        
+        // Close menu when clicking on a link
+        document.querySelectorAll('#navMenu a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                menuToggle.classList.remove('active');
+            });
+        });
+        
         // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
